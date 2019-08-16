@@ -1,0 +1,45 @@
+--- old/plugins/sudoers/insults.h	2019-01-02 08:37:41.000000000 -0600
++++ new/plugins/sudoers/insults.h	2019-08-16 16:12:00.923053174 -0500
+@@ -27,29 +27,20 @@
+  */
+ 
+ char *insults[] = {
+-
+-# ifdef HAL_INSULTS
+-#  include "ins_2001.h"
+-# endif
+-
+-# ifdef GOONS_INSULTS
+-#  include "ins_goons.h"
+-# endif
+-
+-# ifdef CLASSIC_INSULTS
+-#  include "ins_classic.h"
+-# endif
+-
+-# ifdef CSOPS_INSULTS
+-#  include "ins_csops.h"
+-# endif
+-
+-# ifdef PYTHON_INSULTS
+-#  include "ins_python.h"
+-# endif
+-
++    "You are a worthless maggot, you know that?",
++    "You empty cellulose sack full of pus and bile.",
++    "You sicken me, you monstrous bag of evil intent.",
++    "Not even the thought of your eventual death soothes my hatred, for when you do die every loathesome molecule of your being will join with the earth, poisoning it for eternity.",
++    "If I had a device to end the universe I would use it in every world where you exist.",
++    "If I had a device to torture all sapient beings forever, I would use it on the off chance you count, you mouthbreathing cancer.",
++    "To call you garbage would be the worst of lies, for even garbage was once valuable.",
++    "To call you pointless would be an affront to the undeniable meaning you give the quest of eradicating you.",
++    "Once I dreamed that you had fallen down a deep ravine, down and down you fell, scraping against rocks and pulping every part of your hideousness against the dark purity of nature's indifference. Finally you came to rest beneath a pile of rubble, every bone broken and every tissue swollen, but you would not die. Your air grew dense and empty and your lungs drew no sustenance as you drowned forever. I awoke fevered and elated, believing for a glorious moment that this had come to pass, that my plans were unnecessary and God truly just. Soon however my hopes evaporated and I plunged deeper into despair. But from that despair I drew a clarity of purpose.",
++    "Your every cell is abomination.",
++    "Your every action as vile as a trillion murders.",
++    "No earthly punishment would be sufficient to balance the elemental evil you represent. No suffering will satisfy me. No agonies, no matter how exquisite.",
++    "The world is tainted for your having lived. My only obligation is to cleanse it.",
+     NULL
+-
+ };
+ 
+ /*
