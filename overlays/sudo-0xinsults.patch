@@ -1,6 +1,6 @@
 --- old/plugins/sudoers/insults.h	2019-01-02 08:37:41.000000000 -0600
 +++ new/plugins/sudoers/insults.h	2019-08-16 16:12:00.923053174 -0500
-@@ -27,29 +27,20 @@
+@@ -27,29 +27,24 @@
   */
  
  char *insults[] = {
@@ -38,6 +38,10 @@
 +    "Your every action as vile as a trillion murders.",
 +    "No earthly punishment would be sufficient to balance the elemental evil you represent. No suffering will satisfy me. No agonies, no matter how exquisite.",
 +    "The world is tainted for your having lived. My only obligation is to cleanse it.",
++    "Sometimes I think that people are smart. Right thinking. Proper. They think through their beliefs and say clearly what they believe. What you just said has torn that away from me. No longer am I living in a world of enlightened beauty.",
++    "If I could I would reach into your skull and spend the rest of my life dissecting your brain, trying to figure out how exactly you turned a useful instrument into a pile of bloody emptiness.",
++    "Your statements are indistinguishable from randomness. To do better or worse than chance requires some amount of coherence to reality, but you would not recognize the outside world if it punctured your eyeball at 300 feet per second.",
++    "Fuck you and fuck everything you believe.",
      NULL
 -
  };
