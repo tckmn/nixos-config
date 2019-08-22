@@ -15,7 +15,7 @@
   boot.loader.grub.device = "/dev/sda";
   boot.supportedFilesystems = [ "zfs" ];
 
-  time.timeZone = "America/Chicago";
+  time.timeZone = "America/New_York";
   i18n = {
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "us";
