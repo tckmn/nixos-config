@@ -28,7 +28,7 @@
     " ruby      " ruby pry
     " python2   " ( py python27 [] )
     " python3   " ( py python37 [] )
-    " latex     " ( texlive.combine { inherit (texlive) scheme-small latexmk pgfplots; } )
+    " latex     " ( texlive.combine { inherit (texlive) scheme-small latexmk collectbox adjustbox pgfplots; } )
     " misc      " perl jdk ghc rustup julia racket-minimal jq bc
 
     ### UTILITIES
