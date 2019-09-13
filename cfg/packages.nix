@@ -28,8 +28,8 @@
     " ruby      " ruby pry
     " python2   " ( py python27 [] )
     " python3   " ( py python37 [] )
-    " latex     " ( texlive.combine { inherit (texlive) scheme-small latexmk collectbox adjustbox pgfplots; } )
-    " misc      " perl jdk ghc rustup julia racket-minimal jq bc
+    " latex     " ( texlive.combine { inherit (texlive) scheme-small latexmk enumitem collectbox adjustbox pgfplots cancel multirow; } )
+    " misc      " perl jdk ghc rustup julia racket-minimal jq bc sage jelly
 
     ### UTILITIES
     " files     " zip unzip renameutils file stow xdg-user-dirs
@@ -45,6 +45,7 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
+    ( import ../overlays/custom-pkg.nix "jelly" )
     ( import ../overlays/custom-pkg.nix "pry" )
     ( import ../overlays/custom-pkg.nix "qxw" )
     ( import ../overlays/sudo-0xinsults.nix )
