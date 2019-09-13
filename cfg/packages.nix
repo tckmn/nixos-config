@@ -22,7 +22,7 @@
     " capture   " maim slop simplescreenrecorder
     " view      " feh zathura timidity mpv
     " play      " mpd mpc_cli ncmpcpp
-    " tools     " pavucontrol
+    " tools     " pavucontrol picard
 
     ### PROGRAMMING LANGUAGES
     " ruby      " ruby pry
@@ -32,14 +32,14 @@
     " misc      " perl jdk ghc rustup julia racket-minimal jq bc sage jelly
 
     ### UTILITIES
-    " files     " zip unzip renameutils file stow xdg-user-dirs
+    " files     " zip unzip renameutils file stow xdg-user-dirs djvu2pdf
     " sys info  " htop acpi tlp sysstat psmisc light
     " xorg      " xorg.xmodmap xdotool xsel
     " internet  " wget w3m youtube-dl transmission
     " packaging " patchelf bundix
     " security  " pass gnupg pinentry_ncurses
     " fun       " fortune cowsay espeak
-    " misc      " rlwrap
+    " misc      " rlwrap xxd
 
   ];
 
