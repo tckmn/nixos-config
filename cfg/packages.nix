@@ -24,22 +24,22 @@
     " play      " mpd mpc_cli ncmpcpp
     " tools     " pavucontrol picard
 
-    ### PROGRAMMING LANGUAGES
+    ### PROGRAMMING
     " ruby      " ruby pry
     " python2   " ( py python27 [] )
     " python3   " ( py python37 [] )
     " latex     " ( texlive.combine { inherit (texlive) scheme-small latexmk enumitem collectbox adjustbox pgfplots cancel multirow chemfig simplekv; } )
-    " misc      " perl jdk ghc rustup julia racket-minimal jq bc sage jelly
+    " misc      " gcc manpages perl jdk ghc rustup julia racket-minimal jq bc sage jelly
 
     ### UTILITIES
-    " files     " zip unzip renameutils file stow xdg-user-dirs djvu2pdf
+    " files     " zip unzip renameutils file stow xdg-user-dirs djvu2pdf xxd
     " sys info  " htop acpi tlp sysstat psmisc light
     " xorg      " xorg.xmodmap xdotool xsel
     " internet  " wget w3m youtube-dl transmission
     " packaging " patchelf bundix
     " security  " pass gnupg pinentry_ncurses
     " fun       " fortune cowsay espeak
-    " misc      " rlwrap xxd
+    " misc      " rlwrap
 
   ];
 
