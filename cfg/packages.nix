@@ -32,7 +32,7 @@
     " misc      " gcc manpages perl jdk ghc rustup julia racket-minimal jq bc sage jelly
 
     ### UTILITIES
-    " files     " zip unzip renameutils file stow xdg-user-dirs djvu2pdf xxd
+    " files     " zip unzip p7zip renameutils file stow xdg-user-dirs djvu2pdf xxd
     " sys info  " htop acpi tlp sysstat psmisc light
     " xorg      " xorg.xmodmap xdotool xsel
     " internet  " wget w3m youtube-dl transmission
