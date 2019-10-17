@@ -38,7 +38,7 @@
 
   users.users.tckmn = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" ];
+    extraGroups = [ "wheel" "video" "adbusers" ];
     shell = pkgs.zsh;
   };
   users.users.root.shell = pkgs.zsh;
