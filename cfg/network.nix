@@ -5,6 +5,7 @@
   networking.hostId = "0e4ef622";
   networking.wireless.iwd.enable = true;
   networking.useNetworkd = true;
+  networking.useDHCP = false;
 
   services.resolved.enable = true;
   services.openssh.enable = true;
@@ -12,6 +13,7 @@
 
   # use cloudflare dns instead of network-provided
   systemd.network.networks."99-main".dns = [ "1.1.1.1" "1.0.0.1" ];
+  systemd.network.networks."99-main".DHCP = "yes";
   services.resolved.extraConfig = "[Resolve]\nDNS=1.1.1.1 1.0.0.1";
 
   # tell systemd not to wait until network connects to do things
