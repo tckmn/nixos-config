@@ -58,4 +58,13 @@
   programs.slock.enable = true;
   programs.light.enable = true;
   programs.adb.enable = true;
+  services.tlp.enable = true;
+  services.tlp.extraConfig = ''
+  TLP_ENABLE=1
+  START_CHARGE_THRESH_BAT0=76
+  STOP_CHARGE_THRESH_BAT0=80
+  START_CHARGE_THRESH_BAT1=76
+  STOP_CHARGE_THRESH_BAT1=80
+  '';
+
 }
