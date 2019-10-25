@@ -29,7 +29,7 @@
     " ruby      " ruby pry
     " python2   " ( py python27 [] )
     " python3   " ( py python37 [] )
-    " haskell   " ( haskellPackages.ghcWithPackages ( hp: with hp; [ pointfree classy-prelude-yesod yesod-auth yesod-bin stack ] ) )
+    " haskell   " ( haskellPackages.ghcWithPackages ( hp: with hp; [ pointfree classy-prelude-yesod yesod-auth yesod-bin persistent-sqlite foreign-store HaskellForMaths ] ) )
     " latex     " ( texlive.combine { inherit (texlive) scheme-small latexmk enumitem collectbox adjustbox pgfplots cancel multirow chemfig simplekv; } )
     " cmd line  " bc jq sage google-cloud-sdk
     " misc      " perl jdk ghc rustup julia_11 racket-minimal jelly mathematica
