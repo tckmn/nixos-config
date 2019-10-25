@@ -1,7 +1,8 @@
 { stdenv, fetchurl, pkg-config, gtk2, pcre }:
 
 let version = "20190722"; in stdenv.mkDerivation {
-  name = "qxw-${version}";
+  inherit version;
+  pname = "qxw";
 
   src = fetchurl {
     url = "https://www.quinapalus.com/qxw-${version}.tar.gz";
