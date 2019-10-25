@@ -1,5 +1,11 @@
 { config, pkgs, ... }:
 
+# mbsync script for use in email service
+let ms = ( pkgs.writeShellScriptBin "mbsync_helper" ''
+  find ~/.config/mutt -maxdepth 1 -name '*_sync'    -exec mbsync -Vac {} \;
+  find ~/.config/mutt -maxdepth 1 -name '*_notmuch' -exec notmuch --config {} new \;
+'' ); in
+
 {
   services.locate = {
     enable = true;
@@ -24,9 +30,9 @@
     startAt = "*:00/10";
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "%h/bin/ms";
+      ExecStart = "${ms}/bin/mbsync_helper";
     };
-    path = with pkgs; [ isync notmuch ];
+    path = with pkgs; [ findutils isync notmuch ];
   };
 
   systemd.user.services.wallpaper = {
