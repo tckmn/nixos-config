@@ -32,7 +32,7 @@
     " haskell   " ( haskellPackages.ghcWithPackages ( hp: with hp; [ pointfree classy-prelude-yesod yesod-auth yesod-bin persistent-sqlite foreign-store HaskellForMaths ] ) )
     " latex     " ( texlive.combine { inherit (texlive) scheme-small latexmk enumitem collectbox adjustbox pgfplots cancel multirow chemfig simplekv; } )
     " cmd line  " bc jq sage google-cloud-sdk
-    " misc      " perl jdk ghc rustup julia_11 racket-minimal jelly mathematica
+    " misc      " perl jdk rustup julia_11 racket-minimal jelly mathematica
 
     ### UTILITIES
     " files     " zip unzip p7zip renameutils file stow xdg-user-dirs djvu2pdf xxd pandoc
