@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+export LANG=
+[ $# -eq 1 ] || { echo "usage: clank [secs]"; exit 1; }
+cap=$((65535/$1*$1))
+while :
+do
+    sleep 1
+    num=65535
+    while [ $num -ge $cap ]
+    do
+        read -r -n1 -d '' chr1; ord1=$(printf '%d' "'$chr1")
+        read -r -n1 -d '' chr2; ord2=$(printf '%d' "'$chr2")
+        num=$((ord1<<8 | ord2))
+    done
+    (( num % $1 == 0 )) && mpv --no-terminal ~/snd/clank.mp3
+done </dev/random
