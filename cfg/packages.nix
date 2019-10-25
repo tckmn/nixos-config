@@ -42,7 +42,7 @@
     " packaging " patchelf bundix
     " security  " pass gnupg pinentry_ncurses
     " fun       " fortune cowsay espeak
-    " misc      " rlwrap
+    " misc      " rlwrap shell-scripts
 
   ];
 
@@ -51,6 +51,7 @@
     ( import ../overlays/custom-pkg.nix "jelly" )
     ( import ../overlays/custom-pkg.nix "pry" )
     ( import ../overlays/custom-pkg.nix "qxw" )
+    ( import ../overlays/custom-pkg.nix "shell-scripts" )
     ( import ../overlays/sudo-0xinsults.nix )
   ];
 
