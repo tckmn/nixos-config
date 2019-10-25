@@ -1,0 +1,79 @@
+diff --git a/CHANGELOG.rst b/CHANGELOG.rst
+index 39b78d0..763d240 100644
+--- a/CHANGELOG.rst
++++ b/CHANGELOG.rst
+@@ -37,3 +37,4 @@ Version 0.0.8
+ -------------
+ - [Enhancement] --embed-art option to forcibly embed album art (if available)
+ - [Enhancement] --track option for downloading individual tracks and singles.
++- [Dependency] demjson is no longer required.
+diff --git a/README.rst b/README.rst
+index df436bb..2b40dc9 100644
+--- a/README.rst
++++ b/README.rst
+@@ -168,7 +168,6 @@ Dependencies
+ ------------
+ 
+ -  `BeautifulSoup4 <https://pypi.python.org/pypi/beautifulsoup4>`_ - HTML Parsing
+--  `Demjson <https://pypi.python.org/pypi/demjson>`_- JavaScript dict to JSON conversion
+ -  `Mutagen <https://pypi.python.org/pypi/mutagen>`_ - ID3 Encoding
+ -  `Requests <https://pypi.python.org/pypi/requests>`_ - for retriving the HTML
+ -  `Unicode-Slugify <https://pypi.python.org/pypi/unicode-slugify>`_ - A slug generator that turns strings into unicode slugs.
+diff --git a/bandcamp_dl/bandcampjson.py b/bandcamp_dl/bandcampjson.py
+index 5691d7c..9cb25ee 100644
+--- a/bandcamp_dl/bandcampjson.py
++++ b/bandcamp_dl/bandcampjson.py
+@@ -1,7 +1,7 @@
+ import re
+ import logging
+ 
+-import demjson
++import json
+ 
+ 
+ class BandcampJSON:
+@@ -48,7 +48,7 @@ class BandcampJSON:
+         """Convert JavaScript dictionary to JSON"""
+         logging.debug(" Converting JS to JSON..")
+         self.get_js()
+-        # Decode with demjson first to reformat keys and lists
+-        decoded_js = demjson.decode(self.js_data)
++        # Decode first to reformat keys and lists
++        decoded_js = re.sub(r'(?<=[{,\s])([A-Za-z_]\w*)(?=\s*:\s*[\[{"\w])', r'"\1"', re.sub(r'//(?!.*").*', '', self.js_data))
+         # Encode to make valid JSON, add to list of JSON strings
+-        self.json_data.append(demjson.encode(decoded_js))
++        self.json_data.append(decoded_js)
+diff --git a/bandcamp_dl/deps.txt b/bandcamp_dl/deps.txt
+index e8fcc5d..9459760 100644
+--- a/bandcamp_dl/deps.txt
++++ b/bandcamp_dl/deps.txt
+@@ -1,5 +1,4 @@
+ beautifulsoup4==4.6.0
+-demjson==2.2.4
+ docopt==0.6.2
+ mutagen==1.38
+ requests==2.18.4
+diff --git a/requirements.txt b/requirements.txt
+index 4cf6eb5..065a680 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,7 +1,6 @@
+ --index-url https://pypi.python.org/simple/
+ 
+ beautifulsoup4==4.6.0
+-demjson==2.2.4
+ docopt==0.6.2
+ mutagen==1.38
+ requests==2.18.4
+diff --git a/setup.py b/setup.py
+index 38c4e45..fca2cbc 100644
+--- a/setup.py
++++ b/setup.py
+@@ -34,7 +34,6 @@ setup(
+     python_requires='~=3.4',
+     install_requires=[
+         'beautifulsoup4',
+-        'demjson',
+         'docopt',
+         'mutagen',
+         'requests',

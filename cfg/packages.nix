@@ -22,6 +22,7 @@
     " capture   " maim slop simplescreenrecorder
     " view      " feh zathura timidity mpv
     " play      " mpd mpc_cli ncmpcpp
+    " download  " youtube-dl bandcamp-dl
     " tools     " pavucontrol picard
 
     ### PROGRAMMING
@@ -38,7 +39,7 @@
     " files     " zip unzip p7zip renameutils file stow xdg-user-dirs djvu2pdf xxd pandoc
     " sys info  " htop acpi tlp sysstat psmisc light
     " xorg      " xorg.xmodmap xdotool xsel
-    " internet  " wget w3m youtube-dl transmission
+    " internet  " wget w3m transmission
     " packaging " patchelf bundix
     " security  " pass gnupg pinentry_ncurses
     " fun       " fortune cowsay espeak bsdgames ttyrec ipbt
@@ -48,6 +49,7 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
+    ( import ../overlays/custom-pkg.nix "bandcamp-dl" )
     ( import ../overlays/custom-pkg.nix "ipbt" )
     ( import ../overlays/custom-pkg.nix "jelly" )
     ( import ../overlays/custom-pkg.nix "pry" )
