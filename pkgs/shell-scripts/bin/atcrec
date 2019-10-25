@@ -1,0 +1,3 @@
+#!/bin/sh
+[ -n "$1" ] && prefix=:
+ttyrec ~/fun/atc/"$(date "+$1${prefix}atc_%F_%T.ttyrec")" -e "atc -g ${1:-default}"

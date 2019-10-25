@@ -41,13 +41,14 @@
     " internet  " wget w3m youtube-dl transmission
     " packaging " patchelf bundix
     " security  " pass gnupg pinentry_ncurses
-    " fun       " fortune cowsay espeak
+    " fun       " fortune cowsay espeak bsdgames ttyrec ipbt
     " misc      " rlwrap shell-scripts
 
   ];
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
+    ( import ../overlays/custom-pkg.nix "ipbt" )
     ( import ../overlays/custom-pkg.nix "jelly" )
     ( import ../overlays/custom-pkg.nix "pry" )
     ( import ../overlays/custom-pkg.nix "qxw" )
