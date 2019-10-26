@@ -6,7 +6,7 @@
   builtins.filter ( x: builtins.typeOf x != "string" ) [
 
     ### BASE
-    " wm        " i3 i3blocks rofi
+    " wm        " i3 i3blocks rofi ppi3
     " terminal  " termite zsh neovim tmux git
     " misc      " dunst libnotify xss-lock slock redshift equilux-theme
 
@@ -52,6 +52,7 @@
     ( import ../overlays/custom-pkg.nix "bandcamp-dl" )
     ( import ../overlays/custom-pkg.nix "ipbt" )
     ( import ../overlays/custom-pkg.nix "jelly" )
+    ( import ../overlays/custom-pkg.nix "ppi3" )
     ( import ../overlays/custom-pkg.nix "pry" )
     ( import ../overlays/custom-pkg.nix "qxw" )
     ( import ../overlays/custom-pkg.nix "shell-scripts" )
