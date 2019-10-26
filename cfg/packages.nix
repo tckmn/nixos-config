@@ -61,14 +61,15 @@
 
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
   programs.zsh.enable = true;
-  programs.slock.enable = true;
   programs.light.enable = true;
   programs.adb.enable = true;
 
+  programs.slock.enable = true;
+  programs.xss-lock.enable = true;
+  programs.xss-lock.lockerCommand = "${pkgs.slock}/bin/slock";
+
   services.redshift.enable = true;
   services.redshift.extraOptions = [ "-mdrm" ];
-  systemd.user.services.redshift.wantedBy = [ "basic.target" ];
-  systemd.user.services.redshift.partOf   = [ "basic.target" ];
   location.provider = "geoclue2";
 
   services.tlp.enable = true;
