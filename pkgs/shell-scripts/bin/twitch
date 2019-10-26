@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# params: scale crf preset threads
+
+sleep 1
+read -r X Y W H < <(slop -f '%x %y %w %h')
+[ -z "$X" ] && exit
+scale=${scale:-2}
+H=$[H+H%2]
+WS=$[W/scale]
+HS=$[H/scale]
+HS=$[HS+HS%2]
+
+ffmpeg \
+    -f x11grab \
+    -s ${W}x$H \
+    -i :0.0+$X,$Y \
+    -f pulse \
+    -ac 2 \
+    -i default \
+    -r 30 \
+    -g 250 \
+    -keyint_min 30 \
+    -b:v 1000k \
+    -b:a 96k \
+    -vcodec libx264 \
+    -acodec libmp3lame \
+    -crf "${crf:-23}" \
+    -preset "${preset:-veryfast}" \
+    -s ${WS}x$HS \
+    -ar 44100 \
+    -threads "${threads:-3}" \
+    -pix_fmt yuv420p \
+    -f flv \
+    "rtmp://live-ord.twitch.tv/app/$(<~/.twitch_key)"

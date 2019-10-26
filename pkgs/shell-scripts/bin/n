@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+cd "$(xdg-user-dir DOCUMENTS)/notes"
+nvim index.txt '+norm }j' '+set notitle' '+nnoremap <cr> :e <cfile><cr>'
