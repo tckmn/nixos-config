@@ -11,14 +11,15 @@
     " misc      " dunst libnotify xss-lock slock redshift equilux-theme
 
     ### APPLICATIONS
-    " internet  " firefox chromium tdesktop irssi discord
+    " browsers  " firefox chromium
+    " chat      " tdesktop irssi discord pidgin-with-plugins
     " games     " steam the-powder-toy
     " mail      " mutt isync notmuch notmuch-mutt newsboat
     " puzzles   " sgtpuzzles qxw
     " misc      " wine libreoffice
 
     ### MEDIA
-    " edit      " gimp inkscape audacity imagemagick ffmpeg musescore
+    " edit      " gimp inkscape audacity imagemagick ffmpeg musescore lilypond
     " capture   " maim slop simplescreenrecorder
     " view      " feh zathura timidity mpv
     " play      " mpd mpc_cli ncmpcpp
@@ -31,19 +32,19 @@
     " python2   " ( py python27 [] )
     " python3   " ( py python37 [] )
     " haskell   " ( haskellPackages.ghcWithPackages ( hp: with hp; [ pointfree classy-prelude-yesod yesod-auth yesod-bin persistent-sqlite foreign-store HaskellForMaths ] ) )
-    " latex     " ( texlive.combine { inherit (texlive) scheme-small latexmk enumitem collectbox adjustbox pgfplots cancel multirow chemfig simplekv; } )
+    " latex     " ( texlive.combine { inherit (texlive) scheme-small latexmk enumitem collectbox adjustbox pgfplots cancel multirow chemfig simplekv arydshln; } )
     " cmd line  " bc jq sage google-cloud-sdk
     " misc      " perl jdk rustup julia_11 racket-minimal jelly mathematica
 
     ### UTILITIES
-    " files     " zip unzip p7zip renameutils file stow xdg-user-dirs djvu2pdf xxd pandoc
+    " files     " zip unzip p7zip renameutils file stow xdg-user-dirs djvu2pdf xxd pandoc poppler_utils cmark
     " sys info  " htop acpi tlp sysstat psmisc light
     " xorg      " xorg.xmodmap xdotool xsel
-    " internet  " wget w3m transmission
+    " internet  " wget w3m transmission lighttpd
     " packaging " patchelf bundix
     " security  " pass gnupg pinentry_ncurses
     " fun       " fortune cowsay espeak bsdgames ttyrec ipbt
-    " misc      " rlwrap shell-scripts
+    " misc      " rlwrap shell-scripts hplip
 
   ];
 
@@ -57,6 +58,7 @@
     ( import ../overlays/custom-pkg.nix "qxw" )
     ( import ../overlays/custom-pkg.nix "shell-scripts" )
     ( import ../overlays/sudo-0xinsults.nix )
+    ( import ../overlays/pidgin.nix ( with pkgs; [ purple-hangouts ] ) )
   ];
 
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
@@ -65,8 +67,8 @@
   programs.adb.enable = true;
 
   programs.slock.enable = true;
-  programs.xss-lock.enable = true;
-  programs.xss-lock.lockerCommand = "${pkgs.slock}/bin/slock";
+  # programs.xss-lock.enable = true;
+  # programs.xss-lock.lockerCommand = "${pkgs.slock}/bin/slock";
 
   services.redshift.enable = true;
   services.redshift.extraOptions = [ "-mdrm" ];
