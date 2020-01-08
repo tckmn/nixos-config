@@ -2,7 +2,7 @@
 
 {
   environment.systemPackages = with pkgs;
-  let py = v: e: v.withPackages ( p: with p; [ requests beautifulsoup4 ] ++ e ); in
+  let py = v: e: v.withPackages ( p: with p; [ requests beautifulsoup4 numpy ] ++ e ); in
   builtins.filter ( x: builtins.typeOf x != "string" ) [
 
     ### BASE
@@ -12,9 +12,9 @@
 
     ### APPLICATIONS
     " browsers  " firefox chromium
-    " chat      " tdesktop irssi discord pidgin-with-plugins
+    " chat      " tdesktop irssi discord pidgin-with-plugins skype
     " games     " steam the-powder-toy
-    " emulators " fceux dolphinEmu
+    " emulators " fceux dolphinEmu mupen64plus
     " mail      " mutt isync notmuch notmuch-mutt newsboat
     " puzzles   " sgtpuzzles qxw
     " misc      " wine libreoffice
@@ -35,7 +35,7 @@
     " haskell   " ( haskellPackages.ghcWithPackages ( hp: with hp; [ pointfree classy-prelude-yesod yesod-auth yesod-bin persistent-sqlite foreign-store HaskellForMaths ] ) )
     " latex     " ( texlive.combine { inherit (texlive) scheme-small latexmk enumitem collectbox adjustbox pgfplots cancel multirow chemfig simplekv arydshln; } )
     " cmd line  " bc jq sage google-cloud-sdk
-    " misc      " perl openjdk rustup julia_11 racket-minimal jelly mathematica j nodejs coq
+    " misc      " perl openjdk rustup julia_11 racket-minimal jelly mathematica j nodejs coq mono
 
     ### UTILITIES
     " files     " zip unzip p7zip renameutils file stow xdg-user-dirs djvu2pdf xxd pandoc poppler_utils cmark binutils
