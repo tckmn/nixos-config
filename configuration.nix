@@ -15,16 +15,15 @@
   boot.loader.grub.device = "/dev/sda";
   boot.supportedFilesystems = [ "zfs" ];
 
-  time.timeZone = "America/New_York";
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
-  };
+  time.timeZone = "America/Chicago";
+  i18n.defaultLocale = "en_US.UTF-8";
+  console.font = "Lat2-Terminus16";
+  console.keyMap = "us";
 
   sound.enable = true;
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.support32Bit = true;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull; # for bluetooth support
   hardware.opengl.driSupport32Bit = true;
   hardware.bluetooth.enable = true;
 
@@ -42,6 +41,8 @@
     shell = pkgs.zsh;
   };
   users.users.root.shell = pkgs.zsh;
+
+  nix.trustedUsers = [ "root" "tckmn" ];
 
   system.stateVersion = "19.03";
 }
