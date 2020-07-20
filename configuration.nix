@@ -35,6 +35,10 @@
   services.xserver.libinput.tapping = false;
   services.logind.lidSwitchDocked = "suspend";
 
+  services.earlyoom.enable = true;
+  services.earlyoom.freeMemThreshold = 2;
+  services.earlyoom.freeSwapThreshold = 2;
+
   users.users.tckmn = {
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "adbusers" ];
