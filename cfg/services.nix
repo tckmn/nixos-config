@@ -14,8 +14,14 @@ let ms = ( pkgs.writeShellScriptBin "mbsync_helper" ''
     prunePaths = [ "/tmp" "/var/tmp" "/var/cache" "/var/lock" "/var/run" "/var/spool" "/nix/store" "/mnt" ];
   };
 
+  systemd.user.services.dunst = {
+    description = "Dunst notification daemon";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    serviceConfig.ExecStart = "${pkgs.dunst}/bin/dunst";
+  };
+
   systemd.user.services.journal = {
-    enable = true;
     description = "Update journal indicator in status bar";
     startAt = "00:00";
     serviceConfig = {
@@ -25,7 +31,6 @@ let ms = ( pkgs.writeShellScriptBin "mbsync_helper" ''
   };
 
   systemd.user.services.mbsync = {
-    enable = true;
     description = "Sync emails and update search cache";
     startAt = "*:00/10";
     serviceConfig = {
@@ -36,7 +41,6 @@ let ms = ( pkgs.writeShellScriptBin "mbsync_helper" ''
   };
 
   systemd.user.services.wallpaper = {
-    enable = true;
     description = "Randomize the wallpaper";
     startAt = "*:00";
     serviceConfig = {
@@ -44,5 +48,15 @@ let ms = ( pkgs.writeShellScriptBin "mbsync_helper" ''
       ExecStart = "/bin/sh -c 'for n in 0 1; do DISPLAY=:0.$n feh --randomize --bg-fill %h/img/wallpaper/*.png; done; true'";
     };
     path = with pkgs; [ feh ];
+  };
+
+  systemd.user.services.current = {
+    description = "Updates due dates for current tasks";
+    startAt = "00:00";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "/bin/sh -c 'sed -i s/$(date +%%a|tr a-z A-Z)/$(date +%%a|tr A-Z a-z)/g doc/notes/current.txt'";
+    };
+    path = with pkgs; [ gnused ];
   };
 }
