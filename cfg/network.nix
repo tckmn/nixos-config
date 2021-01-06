@@ -11,7 +11,6 @@
   networking.firewall.enable = false;
   # networking.enableIPv6 = false;
 
-  services.resolved.enable = true;
   services.openssh.enable = true;
   services.printing.enable = true;
   services.printing.drivers = [ pkgs.hplip ];
