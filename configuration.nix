@@ -33,6 +33,13 @@
   services.xserver.layout = "us";
   services.xserver.libinput.enable = true;
   services.xserver.libinput.tapping = false;
+  services.xserver.config = ''
+    Section "Device"
+      Identifier "intelgpu0"
+      Driver "intel"
+      Option "VirtualHeads" "1"
+    EndSection
+  '';
   services.logind.lidSwitchDocked = "suspend";
 
   services.earlyoom.enable = true;
