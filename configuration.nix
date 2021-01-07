@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, options, ... }:
 
 {
   imports = [
@@ -54,6 +54,7 @@
   users.users.root.shell = pkgs.zsh;
 
   nix.trustedUsers = [ "root" "tckmn" ];
+  nix.nixPath = options.nix.nixPath.default ++ [ "nixpkgs-overlays=/etc/nixos/overlays-compat/" ];
 
   system.stateVersion = "19.03";
 }
