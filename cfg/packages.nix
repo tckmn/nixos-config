@@ -2,7 +2,11 @@
 
 {
   environment.systemPackages = with pkgs;
-  let py = v: e: v.withPackages ( p: with p; [ requests beautifulsoup4 numpy ] ++ e ); in
+  let
+    py = v: e: (v.withPackages ( p: with p; [
+      requests beautifulsoup4 numpy matplotlib virtualenv pillow #pandas plotly
+    ] ++ e )).override ( args: { ignoreCollisions = true; } );
+  in
   builtins.filter ( x: builtins.typeOf x != "string" ) [
 
     ### BASE
@@ -12,61 +16,78 @@
 
     ### APPLICATIONS
     " browsers  " firefox chromium
-    " chat      " tdesktop irssi discord pidgin-with-plugins skype
-    " games     " steam the-powder-toy
+    " chat      " tdesktop irssi discord pidgin-with-plugins skype unstable.zoom-us
+    " games     " steam steam-run the-powder-toy
     " emulators " fceux dolphinEmu mupen64plus
     " mail      " mutt isync notmuch notmuch-mutt newsboat
     " puzzles   " sgtpuzzles qxw
-    " misc      " wine libreoffice
+    " misc      " wine libreoffice anki
 
     ### MEDIA
-    " edit      " gimp inkscape audacity imagemagick ffmpeg musescore lilypond
+    " edit      " gimp inkscape audacity imagemagick ffmpeg musescore lilypond lmms #sunvox
     " capture   " maim slop simplescreenrecorder
     " view      " feh zathura timidity mpv
     " play      " mpd mpc_cli ncmpcpp
     " download  " youtube-dl bandcamp-dl
-    " tools     " pavucontrol picard
+    " tools     " pavucontrol picard optipng adb-sync
 
     ### PROGRAMMING
     " c         " gcc manpages gnumake gdb
-    " ruby      " ruby pry
+    " ruby      " ( ruby.withPackages ( p : with p; [ discordrb nokogiri pry ] ) )
     " python2   " ( py python27 [] )
-    " python3   " ( py python37 [] )
-    " haskell   " ( haskellPackages.ghcWithPackages ( hp: with hp; [ pointfree classy-prelude-yesod yesod-auth yesod-bin persistent-sqlite foreign-store HaskellForMaths ] ) )
-    " latex     " ( texlive.combine { inherit (texlive) scheme-small latexmk enumitem collectbox adjustbox pgfplots cancel multirow chemfig simplekv arydshln; } )
-    " cmd line  " bc jq sage google-cloud-sdk
-    " misc      " perl openjdk rustup julia_11 racket-minimal jelly mathematica j nodejs coq mono
+    " python3   " ( py python39 [ pyrogram pygame ] )
+    " haskell   " ( haskellPackages.ghcWithPackages ( hp: with hp; [
+                    classy-prelude-yesod yesod-auth yesod-bin yesod-websockets persistent-sqlite foreign-store #yesod-auth-oauth2
+                    warp
+                    HaskellForMaths data-fix wreq #pointfree
+                    quantities
+                    # stm-containers
+                    # HTF
+                    hoogle
+                  ] ) )
+    " java      " openjdk gradle
+    " misc      " bc jq perl rustup racket-minimal jelly j nodejs coq mono sqlite-interactive sass gnuplot tectonic #mathematica julia_13
+    " tools     " universal-ctags google-cloud-sdk
 
     ### UTILITIES
-    " files     " zip unzip p7zip renameutils file stow xdg-user-dirs djvu2pdf xxd pandoc poppler_utils cmark binutils
+    " files     " renameutils binutils moreutils file stow xdg-user-dirs xxd ripgrep
+    " compress  " zip unzip p7zip
+    " documents " djvu2pdf pandoc pdftk poppler_utils cmark
     " sys info  " htop acpi tlp sysstat psmisc light
-    " xorg      " xorg.xmodmap xorg.xkbcomp xdotool xsel
-    " internet  " wget w3m transmission lighttpd
-    " packaging " patchelf bundix
-    " security  " pass gnupg pinentry_ncurses
-    " fun       " fortune cowsay espeak bsdgames ttyrec ipbt
-    " misc      " rlwrap shell-scripts hplip
+    " xorg      " xorg.xmodmap xorg.xkbcomp xorg.xev xorg.xwininfo xdotool xsel x11vnc
+    " internet  " wget w3m transmission lighttpd iftop
+    " packaging " patchelf bundix nix-index
+    " security  " pass gnupg pinentry-curses
+    " fun       " fortune cowsay espeak bsdgames ipbt figlet #ttyrec
+    " misc      " rlwrap shell-scripts
 
   ];
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
+    # ( import ../overlays/custom-pkg.nix "ipbt" )
+    # ( import ../overlays/custom-pkg.nix "jelly" )
+    # ( import ../overlays/custom-pkg.nix "pry" )
     ( import ../overlays/custom-pkg.nix "bandcamp-dl" )
-    ( import ../overlays/custom-pkg.nix "ipbt" )
-    ( import ../overlays/custom-pkg.nix "jelly" )
+    ( import ../overlays/custom-pkg.nix "discordrb" )
     ( import ../overlays/custom-pkg.nix "ppi3" )
-    ( import ../overlays/custom-pkg.nix "pry" )
+    ( import ../overlays/custom-pkg.nix "pygame" )
+    ( import ../overlays/custom-pkg.nix "pyrogram" )
     ( import ../overlays/custom-pkg.nix "qxw" )
     ( import ../overlays/custom-pkg.nix "shell-scripts" )
-    ( import ../overlays/sudo-0xinsults.nix )
-    ( import ../overlays/pidgin.nix ( with pkgs; [ purple-hangouts ] ) )
+    ( import ../overlays/fix-pyflakes.nix )
     ( import ../overlays/jconsole-priority.nix )
+    ( import ../overlays/pidgin.nix ( with pkgs; [ purple-hangouts ] ) )
+    ( import ../overlays/stm-containers.nix )
+    ( import ../overlays/sudo-0xinsults.nix )
+    ( import ../overlays/unstable.nix )
   ];
 
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
   programs.zsh.enable = true;
   programs.light.enable = true;
   programs.adb.enable = true;
+  programs.firejail.enable = true;
 
   programs.slock.enable = true;
   # programs.xss-lock.enable = true;
@@ -77,12 +98,12 @@
   location.provider = "geoclue2";
 
   services.tlp.enable = true;
-  services.tlp.extraConfig = ''
-  TLP_ENABLE=1
-  START_CHARGE_THRESH_BAT0=76
-  STOP_CHARGE_THRESH_BAT0=80
-  START_CHARGE_THRESH_BAT1=76
-  STOP_CHARGE_THRESH_BAT1=80
-  '';
+  services.tlp.settings = {
+    TLP_ENABLE = 1;
+    START_CHARGE_THRESH_BAT0 = 76;
+    STOP_CHARGE_THRESH_BAT0  = 80;
+    START_CHARGE_THRESH_BAT1 = 76;
+    STOP_CHARGE_THRESH_BAT1  = 80;
+  };
 
 }
