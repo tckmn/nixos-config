@@ -50,7 +50,7 @@
     " tools     " universal-ctags google-cloud-sdk
 
     ### UTILITIES
-    " files     " renameutils binutils moreutils file stow xdg-user-dirs xxd ripgrep
+    " files     " renameutils binutils moreutils file xdg-user-dirs xxd ripgrep
     " compress  " zip unzip p7zip
     " documents " djvu2pdf pandoc pdftk poppler_utils cmark
     " sys info  " htop acpi tlp sysstat psmisc light
