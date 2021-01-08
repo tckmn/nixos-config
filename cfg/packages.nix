@@ -75,6 +75,7 @@
     ( import ../overlays/custom-pkg.nix "pyrogram" )
     ( import ../overlays/custom-pkg.nix "qxw" )
     ( import ../overlays/custom-pkg.nix "shell-scripts" )
+    ( import ../overlays/custom-pkg.nix "shemicolon" )
     ( import ../overlays/fix-pyflakes.nix )
     ( import ../overlays/jconsole-priority.nix )
     ( import ../overlays/pidgin.nix ( with pkgs; [ purple-hangouts ] ) )
@@ -83,8 +84,15 @@
     ( import ../overlays/unstable.nix )
   ];
 
+  programs.zsh = {
+    enable = true;
+    interactiveShellInit = with pkgs; ''
+      source ${zsh-nix-shell}/share/zsh-nix-shell/nix-shell.plugin.zsh
+      source ${shemicolon}/share/shemicolon/shemicolon.zsh
+    '';
+  };
+
   programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
-  programs.zsh.enable = true;
   programs.light.enable = true;
   programs.adb.enable = true;
   programs.firejail.enable = true;
