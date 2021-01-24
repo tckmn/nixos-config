@@ -12,7 +12,7 @@
     ### BASE
     " wm        " i3 i3blocks rofi ppi3
     " terminal  " termite zsh neovim tmux git
-    " misc      " dunst libnotify xss-lock slock redshift equilux-theme
+    " misc      " dunst libnotify xss-lock slock redshift equilux-theme adwaita-qt
 
     ### APPLICATIONS
     " browsers  " firefox chromium
@@ -46,7 +46,7 @@
                     hoogle
                   ] ) )
     " java      " openjdk gradle
-    " misc      " bc jq perl rustup racket-minimal jelly j nodejs coq mono sqlite-interactive sass gnuplot tectonic #mathematica julia_13
+    " misc      " bc jq perl rustup racket-minimal jelly j nodejs coq mono sqlite-interactive sass gnuplot tectonic unstable.mathematica #julia_13
     " tools     " universal-ctags google-cloud-sdk
 
     ### UTILITIES
