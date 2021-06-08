@@ -22,11 +22,21 @@
   console.keyMap = "us";
 
   sound.enable = true;
+  sound.extraConfig = ''
+    pcm.pulse { type pulse }
+    ctl.pulse { type pulse }
+  '';
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.support32Bit = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull; # for bluetooth support
   hardware.opengl.driSupport32Bit = true;
   hardware.bluetooth.enable = true;
+
+  services.jack = {
+    jackd.enable = true;
+    alsa.enable = false;
+    loopback.enable = true;
+  };
 
   services.xserver.enable = true;
   services.xserver.displayManager.startx.enable = true;
@@ -49,7 +59,7 @@
 
   users.users.tckmn = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "video" "adbusers" "dialout" ];
+    extraGroups = [ "wheel" "audio" "video" "adbusers" "dialout" "jackaudio" ];
     shell = pkgs.zsh;
   };
   users.users.root.shell = pkgs.zsh;

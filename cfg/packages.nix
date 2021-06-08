@@ -29,7 +29,7 @@
     " view      " feh zathura timidity mpv
     " play      " mpd mpc_cli ncmpcpp
     " download  " youtube-dl bandcamp-dl
-    " tools     " pavucontrol picard optipng adb-sync
+    " tools     " pavucontrol qjackctl picard optipng adb-sync
 
     ### PROGRAMMING
     " c         " gcc manpages gnumake gdb
@@ -60,6 +60,9 @@
     " security  " pass gnupg pinentry-curses
     " fun       " fortune cowsay espeak bsdgames ipbt figlet #ttyrec
     " misc      " rlwrap shell-scripts
+
+    ### TEMPORARY
+    jamulus
 
   ];
 
