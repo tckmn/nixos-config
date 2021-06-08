@@ -1,14 +1,14 @@
-{ lib, python3Packages, python, pkg-config, libX11
+{ lib, python39Packages, python, pkg-config, libX11
 , SDL, SDL2, SDL_image, SDL_mixer, SDL_ttf, libpng, libjpeg, portmidi, freetype
 }:
 
-python3Packages.buildPythonPackage rec {
+python39Packages.buildPythonPackage rec {
   pname = "pygame";
-  version = "2.0.0.dev10";
+  version = "2.0.1";
 
-  src = python3Packages.fetchPypi {
+  src = python39Packages.fetchPypi {
     inherit pname version;
-    sha256 = "12p0zagrhd0z1f28c5ia8yp7xjp8yw9l6jiw3qgkmrymqfh7shy4";
+    sha256 = "00a03qa7gva5r9m54gdx08cfyiw7fw3b4cwrhkccvbvsyiipn7lb";
   };
 
   nativeBuildInputs = [
