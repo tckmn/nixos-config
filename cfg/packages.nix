@@ -107,7 +107,6 @@
   # programs.xss-lock.lockerCommand = "${pkgs.slock}/bin/slock";
 
   services.redshift.enable = true;
-  services.redshift.extraOptions = [ "-mdrm" ];
   location.provider = "geoclue2";
 
   services.tlp.enable = true;
