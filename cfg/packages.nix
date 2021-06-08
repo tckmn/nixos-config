@@ -47,7 +47,7 @@
                   #  hoogle
                   #] ) )
     " java      " openjdk gradle
-    " misc      " bc jq perl rustup racket-minimal jelly j nodejs coq mono sqlite-interactive sass gnuplot tectonic unstable.mathematica #julia_13
+    " misc      " bc jq perl rustup racket-minimal jelly j nodejs coq mono sqlite-interactive sass gnuplot tectonic #unstable.mathematica #julia_13
     " tools     " universal-ctags google-cloud-sdk
 
     ### UTILITIES
