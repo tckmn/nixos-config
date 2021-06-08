@@ -43,7 +43,7 @@
   services.xserver.windowManager.i3.enable = true;
   services.xserver.layout = "us";
   services.xserver.libinput.enable = true;
-  services.xserver.libinput.tapping = false;
+  services.xserver.libinput.touchpad.tapping = false;
   services.xserver.config = ''
     Section "Device"
       Identifier "intelgpu0"

@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, perl, ncurses }:
+{ stdenv, lib, fetchurl, perl, ncurses }:
 
 let version = "20190601.d1519e0"; in stdenv.mkDerivation {
   inherit version;
@@ -12,7 +12,7 @@ let version = "20190601.d1519e0"; in stdenv.mkDerivation {
   nativeBuildInputs = [ perl ];
   buildInputs = [ ncurses ];
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "A high-tech ttyrec player for Unix";
     homepage    = https://www.chiark.greenend.org.uk/~sgtatham/ipbt/;
     license     = licenses.mit;

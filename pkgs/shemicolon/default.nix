@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub }:
+{ stdenv, lib, fetchFromGitHub }:
 
 stdenv.mkDerivation rec {
   pname = "shemicolon";
@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
     install -D shemicolon.zsh -t $out/share/shemicolon
   '';
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "zsh tool that binds various shortcuts to semicolon typed at an empty prompt";
     homepage = src.meta.homepage;
     license = licenses.gpl3;

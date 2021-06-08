@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, bash, coreutils }:
+{ stdenv, lib, fetchFromGitHub, bash, coreutils }:
 
 let version = "0.1"; in stdenv.mkDerivation {
   inherit version;
@@ -15,7 +15,7 @@ let version = "0.1"; in stdenv.mkDerivation {
   PATH = coreutils + /bin;
   args = [ "-c" "mkdir -p $out/bin && cp $src/ppi3.rb $out/bin/ppi3" ];
 
-  meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Preprocessor for the i3 window manager";
     homepage    = https://github.com/tckmn/ppi3;
     license     = licenses.gpl3;
