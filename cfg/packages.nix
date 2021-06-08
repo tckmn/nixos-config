@@ -4,7 +4,7 @@
   environment.systemPackages = with pkgs;
   let
     py = v: e: (v.withPackages ( p: with p; [
-      requests beautifulsoup4 numpy matplotlib virtualenv pillow #pandas plotly
+      requests beautifulsoup4 numpy matplotlib virtualenv #pandas plotly
     ] ++ e )).override ( args: { ignoreCollisions = true; } );
   in
   builtins.filter ( x: builtins.typeOf x != "string" ) [
@@ -35,7 +35,7 @@
     " c         " gcc manpages gnumake gdb
     " ruby      " ( ruby.withPackages ( p : with p; [ nokogiri pry ] ) )
     " python2   " ( py python27 [] )
-    " python3   " ( py python38 [ pyrogram ] )
+    " python3   " ( py python38 [ pyrogram python38Packages.pillow ] )
     " haskell   " ghc
                   #( haskellPackages.ghcWithPackages ( hp: with hp; [
                   #  classy-prelude-yesod yesod-auth yesod-bin yesod-websockets persistent-sqlite foreign-store #yesod-auth-oauth2
