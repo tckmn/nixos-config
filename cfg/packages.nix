@@ -33,18 +33,19 @@
 
     ### PROGRAMMING
     " c         " gcc manpages gnumake gdb
-    " ruby      " ( ruby.withPackages ( p : with p; [ discordrb nokogiri pry ] ) )
+    " ruby      " ( ruby.withPackages ( p : with p; [ nokogiri pry ] ) )
     " python2   " ( py python27 [] )
-    " python3   " ( py python39 [ pyrogram pygame ] )
-    " haskell   " ( haskellPackages.ghcWithPackages ( hp: with hp; [
-                    classy-prelude-yesod yesod-auth yesod-bin yesod-websockets persistent-sqlite foreign-store #yesod-auth-oauth2
-                    warp
-                    HaskellForMaths data-fix wreq #pointfree
-                    quantities
-                    # stm-containers
-                    # HTF
-                    hoogle
-                  ] ) )
+    " python3   " ( py python38 [ pyrogram ] )
+    " haskell   " ghc
+                  #( haskellPackages.ghcWithPackages ( hp: with hp; [
+                  #  classy-prelude-yesod yesod-auth yesod-bin yesod-websockets persistent-sqlite foreign-store #yesod-auth-oauth2
+                  #  warp
+                  #  HaskellForMaths data-fix wreq #pointfree
+                  #  quantities
+                  #  # stm-containers
+                  #  # HTF
+                  #  hoogle
+                  #] ) )
     " java      " openjdk gradle
     " misc      " bc jq perl rustup racket-minimal jelly j nodejs coq mono sqlite-interactive sass gnuplot tectonic unstable.mathematica #julia_13
     " tools     " universal-ctags google-cloud-sdk
@@ -71,10 +72,10 @@
     # ( import ../overlays/custom-pkg.nix "ipbt" )
     # ( import ../overlays/custom-pkg.nix "jelly" )
     # ( import ../overlays/custom-pkg.nix "pry" )
+    # ( import ../overlays/custom-pkg.nix "pygame" )
+    # ( import ../overlays/custom-pkg.nix "discordrb" )
     ( import ../overlays/custom-pkg.nix "bandcamp-dl" )
-    ( import ../overlays/custom-pkg.nix "discordrb" )
     ( import ../overlays/custom-pkg.nix "ppi3" )
-    ( import ../overlays/custom-pkg.nix "pygame" )
     ( import ../overlays/custom-pkg.nix "pyrogram" )
     ( import ../overlays/custom-pkg.nix "qxw" )
     ( import ../overlays/custom-pkg.nix "shell-scripts" )
