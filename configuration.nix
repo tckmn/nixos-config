@@ -14,6 +14,7 @@
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
   boot.supportedFilesystems = [ "zfs" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ]; # for tlp recalibration
 
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
