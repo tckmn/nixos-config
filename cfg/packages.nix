@@ -76,6 +76,7 @@
     ( import ../overlays/custom-pkg.nix "qxw" )
     ( import ../overlays/custom-pkg.nix "shell-scripts" )
     ( import ../overlays/custom-pkg.nix "shemicolon" )
+    ( import ../overlays/discord.nix )
     ( import ../overlays/fix-pyflakes.nix )
     ( import ../overlays/jconsole-priority.nix )
     ( import ../overlays/pidgin.nix ( with pkgs; [ purple-hangouts ] ) )
