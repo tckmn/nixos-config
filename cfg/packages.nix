@@ -4,7 +4,7 @@
   environment.systemPackages = with pkgs;
   let
     py = v: e: (v.withPackages ( p: with p; [
-      requests beautifulsoup4 numpy matplotlib virtualenv #pandas plotly
+      requests numpy virtualenv #pandas plotly beautifulsoup4 matplotlib
     ] ++ e )).override ( args: { ignoreCollisions = true; } );
   in
   builtins.filter ( x: builtins.typeOf x != "string" ) [
@@ -16,10 +16,10 @@
 
     ### APPLICATIONS
     " browsers  " firefox chromium
-    " chat      " tdesktop irssi discord pidgin-with-plugins skype unstable.zoom-us
+    " chat      " tdesktop irssi discord pidgin skypeforlinux zoom-us
     " games     " steam steam-run the-powder-toy
     " emulators " fceux dolphinEmu mupen64plus
-    " mail      " mutt isync notmuch notmuch-mutt newsboat
+    " mail      " mutt isync cyrus_sasl notmuch notmuch-mutt newsboat
     " puzzles   " sgtpuzzles qxw
     " misc      " wine libreoffice anki
 
@@ -32,11 +32,11 @@
     " tools     " pavucontrol qjackctl picard optipng adb-sync
 
     ### PROGRAMMING
-    " c         " gcc manpages gnumake gdb
+    " c         " gcc clang gnumake cmake gdb man-pages
     " ruby      " ( ruby.withPackages ( p : with p; [ nokogiri pry ] ) )
-    " python2   " ( py python27 [] )
-    " python3   " ( py python38 [ pyrogram python38Packages.pillow ] )
-    " haskell   " ghc
+    " python2   " ( python27.withPackages ( p : with p; [] ))
+    " python3   " ( python38.withPackages ( p : with p; [ requests numpy virtualenv pyrogram python38Packages.pillow ] ))
+    " haskell   " ghc stack
                   #( haskellPackages.ghcWithPackages ( hp: with hp; [
                   #  classy-prelude-yesod yesod-auth yesod-bin yesod-websockets persistent-sqlite foreign-store #yesod-auth-oauth2
                   #  warp
@@ -47,7 +47,7 @@
                   #  hoogle
                   #] ) )
     " java      " openjdk gradle
-    " misc      " bc jq perl rustup racket-minimal jelly j nodejs coq mono sqlite-interactive sass gnuplot tectonic #unstable.mathematica #julia_13
+    " misc      " bc jq perl rustup racket-minimal jelly j nodejs coq mono sqlite-interactive sass gnuplot tectonic agda #unstable.mathematica #julia_13
     " tools     " universal-ctags google-cloud-sdk
 
     ### UTILITIES
@@ -58,12 +58,12 @@
     " xorg      " xorg.xmodmap xorg.xkbcomp xorg.xev xorg.xwininfo xdotool xsel x11vnc
     " internet  " wget w3m transmission lighttpd iftop
     " packaging " patchelf bundix nix-index
-    " security  " pass gnupg pinentry-curses
+    " security  " pass gnupg pinentry-curses oathToolkit
     " fun       " fortune cowsay espeak bsdgames ipbt figlet #ttyrec
     " misc      " rlwrap shell-scripts
 
     ### TEMPORARY
-    jamulus
+    # jamulus
 
   ];
 
@@ -101,6 +101,7 @@
   programs.light.enable = true;
   programs.adb.enable = true;
   programs.firejail.enable = true;
+  programs.mosh.enable = true;
 
   programs.slock.enable = true;
   # programs.xss-lock.enable = true;
