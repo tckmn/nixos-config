@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, options, ... }:
 
 {
   services.localtime.enable = true;
@@ -24,7 +24,7 @@
     layout = "us";
     libinput.enable = true;
     libinput.touchpad.tapping = false;
-  }
+  };
   services.logind.lidSwitchDocked = "suspend";
 
   users.users.tckmn = {
