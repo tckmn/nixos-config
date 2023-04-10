@@ -12,16 +12,12 @@
     cfg/services.nix
   ];
 
-  # TODO fix
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda";
-  boot.supportedFilesystems = [ "zfs" ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ]; # for tlp recalibration
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_6_1;
 
   networking.hostName = "alpaca";
   networking.hostId = "0e4ef623";
 
-  # TODO fix
-  system.stateVersion = "19.03";
+  system.stateVersion = "22.11";
 }
