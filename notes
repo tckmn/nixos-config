@@ -1,0 +1,12 @@
+
+old haskell packages:
+
+                  ( haskellPackages.ghcWithPackages ( hp: with hp; [
+                    classy-prelude-yesod yesod-auth yesod-bin yesod-websockets persistent-sqlite foreign-store #yesod-auth-oauth2
+                    warp
+                    HaskellForMaths data-fix wreq #pointfree
+                    quantities
+                    # stm-containers
+                    # HTF
+                    hoogle
+                  ] ) )

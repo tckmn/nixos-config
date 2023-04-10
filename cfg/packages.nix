@@ -29,23 +29,14 @@
     " view      " feh zathura timidity mpv
     " play      " mpd mpc_cli ncmpcpp
     " download  " youtube-dl bandcamp-dl
-    " tools     " pavucontrol qjackctl picard optipng adb-sync
+    " tools     " pavucontrol picard optipng adb-sync #qjackctl
 
     ### PROGRAMMING
     " c         " gcc clang gnumake cmake gdb man-pages
     " ruby      " ( ruby.withPackages ( p : with p; [ nokogiri pry ] ) )
     " python2   " ( python27.withPackages ( p : with p; [] ))
-    " python3   " ( python38.withPackages ( p : with p; [ requests numpy virtualenv pyrogram python38Packages.pillow ] ))
+    " python3   " ( python38.withPackages ( p : with p; [ requests numpy virtualenv pillow ] ))
     " haskell   " ghc stack
-                  #( haskellPackages.ghcWithPackages ( hp: with hp; [
-                  #  classy-prelude-yesod yesod-auth yesod-bin yesod-websockets persistent-sqlite foreign-store #yesod-auth-oauth2
-                  #  warp
-                  #  HaskellForMaths data-fix wreq #pointfree
-                  #  quantities
-                  #  # stm-containers
-                  #  # HTF
-                  #  hoogle
-                  #] ) )
     " java      " openjdk gradle
     " misc      " bc jq perl rustup racket-minimal jelly j nodejs coq mono sqlite-interactive sass gnuplot tectonic agda #unstable.mathematica #julia_13
     " tools     " universal-ctags google-cloud-sdk
@@ -62,9 +53,6 @@
     " fun       " fortune cowsay espeak bsdgames ipbt figlet #ttyrec
     " misc      " rlwrap shell-scripts
 
-    ### TEMPORARY
-    # jamulus
-
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -76,7 +64,6 @@
     # ( import ../overlays/custom-pkg.nix "discordrb" )
     ( import ../overlays/custom-pkg.nix "bandcamp-dl" )
     ( import ../overlays/custom-pkg.nix "ppi3" )
-    ( import ../overlays/custom-pkg.nix "pyrogram" )
     ( import ../overlays/custom-pkg.nix "qxw" )
     ( import ../overlays/custom-pkg.nix "shell-scripts" )
     ( import ../overlays/custom-pkg.nix "shemicolon" )
@@ -84,7 +71,6 @@
     ( import ../overlays/fix-pyflakes.nix )
     ( import ../overlays/jconsole-priority.nix )
     ( import ../overlays/pidgin.nix ( with pkgs; [ purple-hangouts ] ) )
-    ( import ../overlays/stm-containers.nix )
     ( import ../overlays/sudo-0xinsults.nix )
     ( import ../overlays/unstable.nix )
   ];
