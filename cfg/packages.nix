@@ -2,21 +2,16 @@
 
 {
   environment.systemPackages = with pkgs;
-  let
-    py = v: e: (v.withPackages ( p: with p; [
-      requests numpy virtualenv #pandas plotly beautifulsoup4 matplotlib
-    ] ++ e )).override ( args: { ignoreCollisions = true; } );
-  in
   builtins.filter ( x: builtins.typeOf x != "string" ) [
 
     ### BASE
     " wm        " i3 i3blocks rofi ppi3
-    " terminal  " termite zsh neovim tmux git
-    " misc      " dunst libnotify xss-lock slock redshift equilux-theme adwaita-qt
+    " terminal  " termite neovim tmux git #zsh
+    " misc      " dunst libnotify equilux-theme adwaita-qt #slock xss-lock redshift
 
     ### APPLICATIONS
     " browsers  " firefox chromium
-    " chat      " tdesktop irssi discord pidgin skypeforlinux zoom-us
+    " chat      " tdesktop irssi skypeforlinux zoom-us #pidgin discord
     " games     " steam steam-run the-powder-toy
     " emulators " fceux dolphinEmu mupen64plus
     " mail      " mutt isync cyrus_sasl notmuch notmuch-mutt newsboat
@@ -28,7 +23,7 @@
     " capture   " maim slop simplescreenrecorder
     " view      " feh zathura timidity mpv
     " play      " mpd mpc_cli ncmpcpp
-    " download  " youtube-dl bandcamp-dl
+    " download  " #youtube-dl bandcamp-dl
     " tools     " pavucontrol picard optipng adb-sync #qjackctl
 
     ### PROGRAMMING
@@ -45,11 +40,11 @@
     " files     " renameutils binutils moreutils file xdg-user-dirs xxd ripgrep fd
     " compress  " zip unzip p7zip
     " documents " djvu2pdf pandoc pdftk poppler_utils cmark
-    " sys info  " htop acpi tlp sysstat psmisc light
+    " sys info  " htop acpi sysstat psmisc #light tlp
     " xorg      " xorg.xmodmap xorg.xkbcomp xorg.xev xorg.xwininfo xdotool xsel x11vnc
     " internet  " wget w3m transmission lighttpd iftop
     " packaging " patchelf bundix nix-index
-    " security  " pass gnupg pinentry-curses oathToolkit
+    " security  " pass pinentry-curses oathToolkit #gnupg
     " fun       " fortune cowsay espeak bsdgames ipbt figlet #ttyrec
     " misc      " rlwrap shell-scripts
 
@@ -57,20 +52,20 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.overlays = [
+    # ( import ../overlays/custom-pkg.nix "bandcamp-dl" )
+    # ( import ../overlays/custom-pkg.nix "discordrb" )
     # ( import ../overlays/custom-pkg.nix "ipbt" )
     # ( import ../overlays/custom-pkg.nix "jelly" )
     # ( import ../overlays/custom-pkg.nix "pry" )
     # ( import ../overlays/custom-pkg.nix "pygame" )
-    # ( import ../overlays/custom-pkg.nix "discordrb" )
-    ( import ../overlays/custom-pkg.nix "bandcamp-dl" )
+    # ( import ../overlays/discord.nix )
+    # ( import ../overlays/fix-pyflakes.nix )
+    # ( import ../overlays/pidgin.nix ( with pkgs; [ purple-hangouts ] ) )
     ( import ../overlays/custom-pkg.nix "ppi3" )
     ( import ../overlays/custom-pkg.nix "qxw" )
     ( import ../overlays/custom-pkg.nix "shell-scripts" )
     ( import ../overlays/custom-pkg.nix "shemicolon" )
-    ( import ../overlays/discord.nix )
-    ( import ../overlays/fix-pyflakes.nix )
     ( import ../overlays/jconsole-priority.nix )
-    ( import ../overlays/pidgin.nix ( with pkgs; [ purple-hangouts ] ) )
     ( import ../overlays/sudo-0xinsults.nix )
     ( import ../overlays/unstable.nix )
   ];
@@ -95,14 +90,5 @@
 
   services.redshift.enable = true;
   location.provider = "geoclue2";
-
-  services.tlp.enable = true;
-  services.tlp.settings = {
-    TLP_ENABLE = 1;
-    START_CHARGE_THRESH_BAT0 = 76;
-    STOP_CHARGE_THRESH_BAT0  = 80;
-    START_CHARGE_THRESH_BAT1 = 76;
-    STOP_CHARGE_THRESH_BAT1  = 80;
-  };
 
 }

@@ -33,5 +33,16 @@
   services.earlyoom.freeMemThreshold = 2;
   services.earlyoom.freeSwapThreshold = 2;
 
+  services.tlp.enable = true;
+  services.tlp.settings = {
+    TLP_ENABLE = 1;
+    START_CHARGE_THRESH_BAT0 = 76;
+    STOP_CHARGE_THRESH_BAT0  = 80;
+    START_CHARGE_THRESH_BAT1 = 76;
+    STOP_CHARGE_THRESH_BAT1  = 80;
+  };
+
+  services.tckmn_files.enable = true;
+
   system.stateVersion = "19.03";
 }
