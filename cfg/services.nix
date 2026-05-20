@@ -19,8 +19,7 @@ in
 
     services.locate = {
       enable = true;
-      localuser = null;
-      locate = pkgs.mlocate;
+      package = pkgs.mlocate;
       prunePaths = [ "/tmp" "/var/tmp" "/var/cache" "/var/lock" "/var/run" "/var/spool" "/nix/store" "/mnt" ];
     };
 

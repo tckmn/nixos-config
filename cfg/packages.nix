@@ -1,52 +1,65 @@
 { config, pkgs, ... }:
 
+#let nixpkgs_biber = import (builtins.fetchTarball {
+#    url = "https://github.com/NixOS/nixpkgs/archive/80c24eeb9ff46aa99617844d0c4168659e35175f.tar.gz";
+#    sha256 = "0a2cws2hhdi4j5ipn1rsk5k7b6vw1l29ibb020bvgl9mza51psgl";
+#}) {}; in
 {
   environment.systemPackages = with pkgs;
   builtins.filter ( x: builtins.typeOf x != "string" ) [
 
     ### BASE
     " wm        " i3 i3blocks rofi ppi3
-    " terminal  " termite neovim tmux git #zsh
-    " misc      " dunst libnotify equilux-theme adwaita-qt #slock xss-lock redshift
+    " terminal  " alacritty neovim tmux git
+    " misc      " dunst libnotify equilux-theme adwaita-qt
 
     ### APPLICATIONS
     " browsers  " firefox chromium
-    " chat      " tdesktop irssi skypeforlinux zoom-us #pidgin discord
-    " games     " steam steam-run the-powder-toy
-    " emulators " fceux dolphinEmu mupen64plus
-    " mail      " mutt isync cyrus_sasl notmuch notmuch-mutt newsboat
-    " puzzles   " sgtpuzzles qxw
-    " misc      " wine libreoffice anki
+    " chat      " telegram-desktop signal-desktop #ripcord irssi skypeforlinux zoom-us pidgin discord
+    " games     " steam steam-run the-powder-toy obs-studio
+    " emulators " #fceux dolphinEmu mupen64plus
+    " mail      " mutt isync notmuch notmuch-mutt #cyrus_sasl newsboat
+    " puzzles   " sgt-puzzles qxw
+    " misc      " anki wineWowPackages.stable libreoffice
 
     ### MEDIA
-    " edit      " gimp inkscape audacity imagemagick ffmpeg musescore lilypond lmms #sunvox
+    " edit      " gimp inkscape audacity imagemagick ffmpeg musescore lmms lilypond #sunvox
     " capture   " maim slop simplescreenrecorder
     " view      " feh zathura timidity mpv
-    " play      " mpd mpc_cli ncmpcpp
+    " play      " mpd mpc (ncmpcpp.override { visualizerSupport = true; })
     " download  " #youtube-dl bandcamp-dl
-    " tools     " pavucontrol picard optipng adb-sync #qjackctl
+    " tools     " pavucontrol qpwgraph picard optipng adb-sync #qjackctl
 
     ### PROGRAMMING
     " c         " gcc clang gnumake cmake gdb man-pages
     " ruby      " ( ruby.withPackages ( p : with p; [ nokogiri pry ] ) )
-    " python2   " ( python27.withPackages ( p : with p; [] ))
-    " python3   " ( python38.withPackages ( p : with p; [ requests numpy virtualenv pillow ] ))
+    " python2   " #( python27.withPackages ( p : with p; [] ))
+    " python3   " python3 #( python38.withPackages ( p : with p; [ requests virtualenv ] ))
     " haskell   " ghc stack
     " java      " openjdk gradle
-    " misc      " bc jq perl rustup racket-minimal jelly j nodejs coq mono sqlite-interactive sass gnuplot tectonic agda #unstable.mathematica #julia_13
+    " web       " nodejs typescript sassc
+    " misc      " coq jq tectonic bc racket-minimal sqlite-interactive cargo rustc #perl rustup jelly j mono sass gnuplot agda unstable.mathematica julia_13
     " tools     " universal-ctags google-cloud-sdk
 
     ### UTILITIES
     " files     " renameutils binutils moreutils file xdg-user-dirs xxd ripgrep fd
     " compress  " zip unzip p7zip
-    " documents " djvu2pdf pandoc pdftk poppler_utils cmark
-    " sys info  " htop acpi sysstat psmisc #light tlp
-    " xorg      " xorg.xmodmap xorg.xkbcomp xorg.xev xorg.xwininfo xdotool xsel x11vnc
-    " internet  " wget w3m transmission lighttpd iftop
-    " packaging " patchelf bundix nix-index
-    " security  " pass pinentry-curses oathToolkit #gnupg
-    " fun       " fortune cowsay espeak bsdgames ipbt figlet #ttyrec
-    " misc      " rlwrap shell-scripts
+    " documents " djvu2pdf pandoc pdftk poppler cmark
+    " sys info  " htop acpi sysstat psmisc #tlp
+    " xorg      " xorg.xmodmap xorg.xkbcomp xorg.xev xorg.xwininfo xdotool xsel #x11vnc
+    " internet  " wget iftop w3m lighttpd #transmission iftop
+    " packaging " #patchelf bundix nix-index
+    " security  " pass pinentry-curses oath-toolkit
+    " fun       " bsdgames fortune cowsay xcowsay cmatrix figlet #espeak ipbt ttyrec
+    " misc      " shell-scripts #rlwrap
+
+    ### TEMPORARY
+    #mma
+    #nixpkgs_biber.biber
+    #flatpak
+    #jmtpfs
+    #plover.dev
+    #appimage-run
 
   ];
 
@@ -63,11 +76,12 @@
     # ( import ../overlays/pidgin.nix ( with pkgs; [ purple-hangouts ] ) )
     ( import ../overlays/custom-pkg.nix "ppi3" )
     ( import ../overlays/custom-pkg.nix "qxw" )
+    # ( import ../overlays/custom-pkg.nix "mma" )
     ( import ../overlays/custom-pkg.nix "shell-scripts" )
     ( import ../overlays/custom-pkg.nix "shemicolon" )
     ( import ../overlays/jconsole-priority.nix )
-    ( import ../overlays/sudo-0xinsults.nix )
-    ( import ../overlays/unstable.nix )
+    #( import ../overlays/sudo-0xinsults.nix )
+    #( import ../overlays/unstable.nix )
   ];
 
   programs.zsh = {
@@ -83,6 +97,8 @@
   programs.adb.enable = true;
   programs.firejail.enable = true;
   programs.mosh.enable = true;
+  programs.dconf.enable = true;
+  programs.direnv.enable = true;
 
   programs.slock.enable = true;
   # programs.xss-lock.enable = true;

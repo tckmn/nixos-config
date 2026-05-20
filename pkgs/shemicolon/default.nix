@@ -7,8 +7,8 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "tckmn";
     repo = "shemicolon";
-    rev = "7f95c6f6bee6dbdd6ff850ced74e6d76cfa10877";
-    sha256 = "1xjj722w1h5mc48g0sx5np333b1jkgny590ay2bfj3km648p7c4z";
+    rev = "114d2fc9d7b8cc5b617ae44ad6a651ca6a4d89c8";
+    sha256 = "sha256-Ovz2z4qW/1vRn6xhMuhpds1yyL6FuBpfhcKQHWzahtk=";
   };
 
   installPhase = ''
