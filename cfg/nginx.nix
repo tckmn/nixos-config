@@ -6,6 +6,9 @@
   security.acme.certs."tsetse.tck.mn".extraDomainNames = [
     "dyn.tck.mn"
     "pzplus.tck.mn"
+    "mafia.tck.mn"
+    "machine.tck.mn"
+    "gratility.tck.mn"
   ];
   services.nginx = {
     enable = true;
@@ -45,6 +48,36 @@
             add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, DELETE, PUT' always;
             add_header 'Access-Control-Allow-Credentials' 'true' always;
             add_header 'Access-Control-Allow-Headers' 'User-Agent,Keep-Alive,Content-Type' always;
+          '';
+        };
+      };
+      "mafia.tck.mn" = {
+        forceSSL = true;
+        useACMEHost = "tsetse.tck.mn";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:7148";
+        };
+      };
+      "machine.tck.mn" = {
+        forceSSL = true;
+        useACMEHost = "tsetse.tck.mn";
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:7874";
+          extraConfig = ''
+            proxy_set_header X-Forwarded-Proto $scheme;
+          '';
+        };
+      };
+      "gratility.tck.mn" = {
+        forceSSL = true;
+        useACMEHost = "tsetse.tck.mn";
+        locations."/ws/" = {
+          proxyPass = "http://127.0.0.1:4784";
+          extraConfig = ''
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+            proxy_read_timeout 86400;
           '';
         };
       };

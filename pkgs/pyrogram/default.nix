@@ -2,7 +2,7 @@
 
 let tgcrypto = (import <nixpkgs> {}).callPackage ../tgcrypto {}; in
 python3Packages.buildPythonPackage rec {
-  version = "0.17.1";
+  version = "2.0.106";
   pname = "pyrogram";
 
   src = fetchFromGitHub {
